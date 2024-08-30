@@ -1,0 +1,1078 @@
+﻿body {
+	margin: 0px;
+	background: #C0C0C0 url(../Images/background_main.jpg) repeat left top;
+	font: 13px Calibri, Tahoma, Verdana, Helvetica, Helvetica-Narrow, Sans-Serif;
+	width: 100%;
+}
+#login a:link, #login a:visited {
+	color: #FFFFFF;
+}
+#title h1 a:link, #title h1 a:visited {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#reportresults h2 
+{
+	font-size: 1.1em;
+	font-weight: bold;
+}
+a:link {
+	color: #396EAA;
+}
+a:visited {
+	
+}
+.hidden {
+    visibility:hidden;
+}
+a:hover {
+	text-decoration: none;
+	color: #396FFF;
+}
+a:active {
+	text-decoration: none;
+}
+
+.AttachedFile
+{
+}
+.AttachedFile img
+{
+    width: 30px;
+    height: 30px;
+}
+
+/* File Upload Class */
+.FileUploadClass  
+{  
+	
+}  
+.FileUploadClass input  
+{  
+	margin-top: 0px;
+	margin-bottom: 0px;
+}  
+.FileUploadClass div  
+{  
+	margin-top: 0px;
+	margin-bottom: 0px;
+}  
+/* End File Upload Class */
+/* Menu */
+.menu {
+	margin-left:1px;
+	font-weight: bold;
+}
+
+.menuItem {
+
+	background: #659EC7;
+	padding: 1px 1px 1px 1px;
+	text-align: left;
+	color: #ffffff;
+	border: 1px solid #FFFFFF;
+	height: 24px;
+}
+.menuItem:hover {
+
+	background: #2B547E;
+	padding-left:1px;
+	text-align: left;
+	color: #ffffff;
+	height: 24px;
+	font-weight: bold;
+	cursor:default;
+}
+.menuItem a {
+	background: none;
+	padding-left:1px;
+	text-align: left;
+	color: #ffffff;
+	height: 24px;
+	font-weight: bold;
+}
+.menuItem a:hover {
+	background: none;
+	padding-left:1px;
+	text-align: left;
+	color: #ffffff;
+	height: 24px;
+	font-weight: bold;
+}
+.menuSelectedItem td {
+	
+}
+
+.menuPopup {
+	background: #8C9FB4;
+	color: #ffffff;
+}
+.menuPopupItem 
+{
+    background-color: #659EC7;
+	color: #ffffff;
+	border: 1px solid #FFFFFF;
+	padding: 1px;
+	height: 24px;
+}
+.menuPopupItem:hover
+{
+    background-color: 	#2B547E;
+	color: #ffffff;
+	border: 1px solid #FFFFFF;
+	padding: 1px;
+	height: 24px;
+	font-weight: bold;
+}
+.menuPopupItem a
+{
+	color: #ffffff;
+	background-color: inherit;
+	padding: 1px;
+	height: 24px;
+	font-weight: bold;
+}
+.menuPopupItem a:hover
+{
+    background-color: inherit;
+	color: #C85A17;
+	padding: 1px;
+	height: 24px;
+	font-weight: bold;
+}
+
+/* End Menu */
+.Msg
+{
+    color: #cc0000;
+    font-style:italic;
+    font-weight: bold;
+}
+
+.boldMsg
+{
+    color: #cc0000;
+    font-style:italic;
+    font-weight: bold;
+}
+
+.errorMsg
+{
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.login {
+	vertical-align: middle;
+	font-size: 12px;
+	font-weight: bold;
+	color: White;
+}
+.logo
+{
+    vertical-align: middle;
+    font-size: 35px;
+    font-weight: bold;
+    color: White;
+}
+/* define the main layout divs */
+#header {
+	background: #000000 url(../Images/header.png) repeat left top fixed;
+	/*margin-right: auto;*/
+	vertical-align: middle;
+	height: 40px;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font: 20px;
+	font-weight: bold;
+	color: White;
+}
+
+#body {
+	/*padding: 0px 8px 10px 7px;*/
+	background: #C0C0C0 url(../Images/background_body.gif) repeat-x left top;
+}
+/* IE needs height:512px BUT this height:512px below must be removed to display correctly in Mozilla */
+#divMainContent
+{
+    background-color: White;
+	height: 100%;
+}
+/* Mozilla needs min-height:512px (IE will ignore this min-height) */
+#divMainContent 
+{
+	min-height: 512px;
+}
+#divMainContent table
+{
+    width: 100%;
+}
+#divMainContent table tbody
+{
+    width: 100%;
+}
+
+#divMainContent {
+	padding: 10px;
+	border: 1px solid #000000;
+	background-color: White;
+	color: #666666;
+	font-family: Calibri, Tahoma, Verdana, Helvetica, Helvetica-Narrow, Sans-Serif;
+}
+.MainContainHeader {
+	padding: 10px;
+	margin-top: 0px;
+	background: #D6DDE9 url(images/background_formsection.gif) repeat-x center;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* define other elements inside the main layout divs */
+#title h1 {
+	display: inline;
+	color: #FFFFFF;
+	font-size: 14px;
+	font-weight: bold;
+}
+/* can be removed if no images in breadcrumb area */
+#breadcrumb img {
+	border: none;
+	padding-right: 3px;
+	vertical-align: middle;
+}
+/* all the legend tags use this same style */
+legend {
+	/*padding: 0px 0px;
+	margin: 0px 0px 0px 0px;*/
+	color: #666666;
+	font-weight: bold;
+	font-size: 1em;
+	vertical-align: middle;
+}
+
+/* all the fieldset tags use this same style */
+fieldset {
+	margin-bottom: 0px;
+	padding: 4px 4px 4px 4px;
+	display: block;
+}
+
+/* zero margin on all forms */
+form {
+	margin: 0px;
+}
+/* create section heading container to separate long forms */
+.MainContainHeader {
+	padding: 10px;
+	margin-top: 0px;
+	background: #D6DDE9 url(../Images/background_formsection.gif) repeat-x center;
+	font-weight: bold;
+	text-align: center;
+}
+/* sometimes we hide elements from display in visual browsers (but leave them in the source for non visual browsers and for accessibility). I've also hidden the table in the admin_create_projects.html page */
+
+/*Hover Menu*/
+.popupMenu {
+	position:absolute;
+	visibility:hidden;
+	background-color:#F5F7F8;
+	opacity:0.9;
+	filter: alpha(opacity=90);
+}
+
+.popupHover {
+	background-image:url(../Images/header-opened.png);
+	background-repeat:repeat-x;
+	background-position:left top;
+	background-color:#F5F7F8;
+}
+/************ MaskedEdit Related Styles ***********************/
+.MaskedEditFocus
+{
+    background-color: #ffffcc;
+    color: #000000;
+}
+.MaskedEditMessage
+{
+	color: #ff0000;
+	font-weight: bold;
+}
+.MaskedEditError
+{
+    background-color: #ffcccc;
+}
+.MaskedEditFocusNegative
+{
+    background-color: #ffffcc;
+    color: #ff0000;
+}
+.MaskedEditBlurNegative
+{
+    color: #ff0000;
+}
+/*Ajax Control Toolkit Calender Propertis*/
+.MyCalendar .ajax__calendar_container {
+    border:1px solid #646464;
+    background-color: White;
+    color: #2B60DE;
+	z-index: 1000;
+}
+.MyCalendar .ajax__calendar_other .ajax__calendar_day,
+.MyCalendar .ajax__calendar_other .ajax__calendar_year {
+    color: black;
+}
+.MyCalendar .ajax__calendar_hover .ajax__calendar_day,
+.MyCalendar .ajax__calendar_hover .ajax__calendar_month,
+.MyCalendar .ajax__calendar_hover .ajax__calendar_year {
+    color: black;
+}
+.MyCalendar .ajax__calendar_active .ajax__calendar_day,
+.MyCalendar .ajax__calendar_active .ajax__calendar_month,
+.MyCalendar .ajax__calendar_active .ajax__calendar_year {
+    color: black;
+    font-weight:bold;
+}
+.MyCalendar .ajax__calendar {
+    position: relative;
+    left: 0px !important;
+    top: 0px !important;
+    visibility: visible; 
+    display: block;
+}
+.MyCalendar .ajax__calendar iframe
+{
+    left: 0px !important;
+    top: 0px !important;
+}
+
+/* begin classes */
+input[type="checkbox"] {
+    border: none !important;
+    background-color: transparent;
+}
+input[type="checkbox"]:disabled {
+    border: none;
+	background-color: transparent;
+}
+input, select, textarea {
+	margin-top: 4px;
+	margin-bottom: 4px;
+	font-family: Calibri, Tahoma, Verdana, Helvetica, Helvetica-Narrow, Sans-Serif;
+	font-size: 13px;
+	border: 1px solid #6D7B8D;
+	background-color: #F0FFF0;
+}
+select:focus, input:focus, textarea:focus {
+	margin-top: 4px;
+	margin-bottom: 4px;
+	border: 1px solid #6694E3;
+	background-color: #FFFF99;
+}
+input.number 
+{
+    text-align: right;
+}
+
+input.positivenumber 
+{
+    text-align: right;
+}
+input:disabled, select:disabled, textarea:disabled
+{
+	border: 1px solid #B0A698;
+	background-color: #F2F2F2;
+	color: #624747;
+}
+
+
+/* Button Style*/
+.button
+{
+    text-align: center;
+	background: transparent url(../Images/square-gray-right.gif) no-repeat top left;
+	/*display: block;*/
+	/*float: left;*/
+	font-weight:bold;
+	line-height: 22px; /* This value + 4px + 4px (top and bottom padding of SPAN) must equal height of button background (default is 30px) */
+	height: 25px; /* Height of button background height */
+	padding-left: 8px; /* Width of left menu image */
+	text-decoration: none;
+	/*min-width: 50px;*/
+	
+}
+.button:hover
+{
+	background: transparent url('../Images/square-blue-right.gif') no-repeat top left;
+	/*display: block;*/
+	/*float: left;*/
+	/*font-weight:bold;*/
+	/*line-height: 22px;*/ /* This value + 4px + 4px (top and bottom padding of SPAN) must equal height of button background (default is 30px) */
+	/*height: 25px;*/ /* Height of button background height */
+	/*padding-left: 8px;*/ /* Width of left menu image */
+	/*text-decoration: none;*/
+	cursor:pointer;
+}
+.button:focus
+{
+	background: transparent url('../Images/square-blue-right.gif') no-repeat top left;
+	/*display: block;*/
+	/*float: left;*/
+	/*font-weight:bold;*/
+	/*line-height: 22px;*/ /* This value + 4px + 4px (top and bottom padding of SPAN) must equal height of button background (default is 30px) */
+	/*height: 25px; *//* Height of button background height */
+	/*padding-left: 8px;*/ /* Width of left menu image */
+	/*text-decoration: none;*/
+}
+.button:disabled
+{
+    color: #CCCCCC;
+}
+/* End Button Style*/
+
+/* File Upload Class */
+.FileUploadClass  
+{  
+	
+}  
+.FileUploadClass input  
+{  
+	margin-top: 0px;
+	margin-bottom: 0px;
+}  
+.FileUploadClass div  
+{  
+	margin-top: 0px;
+	margin-bottom: 0px;
+}  
+/* End File Upload Class */
+
+/*===================================
+        AutoComplete
+====================================*/
+.watermarked
+{
+	font-style:italic;
+	color:Gray;
+}
+/*AutoComplete flyout */
+
+
+.autocomplete_completionListElement {
+    background-color: window;
+    border: 1px solid buttonshadow;
+    color: windowtext;
+    height: 200px;
+    list-style-type: none;
+    margin: 0 !important;
+    overflow: auto;
+    text-align: left;
+    padding: 2px 2px 2px 2px;
+}
+
+/* AutoComplete highlighted item */
+
+.autocomplete_highlightedListItem
+{
+	background-color: #FFFF99;
+	margin : 0px!important;
+	border-bottom: 1px solid gray;
+	color: black;
+	height: auto;
+	padding: 2px 2px 2px 2px;
+}
+
+/* AutoComplete item */
+
+.autocomplete_listItem 
+{
+    margin : 0px!important;
+	background-color : window;
+	color : windowtext;
+	padding: 2px 2px 2px 2px;
+	height: auto;
+	border-bottom: 1px solid gray;
+}
+
+
+/*===================================
+       END AutoComplete flyout 
+*/
+
+/*CollapsiblePanel*/
+.collapsePanel {
+	
+	background-color:white;
+	overflow:hidden;
+}
+
+.collapsePanelHeader{
+	width:100%;
+	height:30px;
+	background-image: url(../Images/bg-menu-main.png);
+	background-repeat:repeat-x;
+	color:black;
+	font-weight:bold;
+}
+
+/*Modal Popup*/
+.modalPopupHeader
+{
+	border-right: black 2px solid;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    border-top: black 2px solid;
+    display: none;
+    border-left: black 2px solid;
+    border-bottom: black 2px solid;
+    background-color: white;
+}
+.modalPopupDrag
+{
+	font-weight: bold;
+    cursor: move;
+    text-align: center;
+    color: white;
+    background-color: #95B9C7;
+    font-size: 14px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-left: 1px;
+    padding-bottom: 1px;
+}
+
+/* Common */
+.modalPopupCommon
+{
+    border: solid 2px #7F5217;
+    padding: 5px 5px 5px 5px;
+    background-color: white;
+    width: 400px;
+    display: inline-block;
+}
+.modalBackgroundCommon
+{
+   
+	background-color: Gray;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+
+/* Confirm: are you sure?...*/
+.modalBackgroundConfirm
+{
+	background-color: Gray;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+	
+}
+
+.modalPopupConfirm
+{
+	background-color: #ffffdd;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #7F5217;	
+	padding:3px;
+	width:250px;
+	text-align:center;	
+}
+
+.confirmmessage
+{
+	
+}
+
+.confirmheader
+{
+	background-color: #6698FF;
+	-moz-border-radius: 5px;
+	color: White;
+	font-weight:bold;
+}
+
+.confirmtable
+{
+	width: 100%;
+}
+.confirmtable td
+{
+	text-align: center !important;
+}
+.confirmtable td img
+{
+    width: 45px;
+    height: 45px;
+}
+/* End Confirm*/
+.questiontable
+{
+	width: 100%;
+	/*display: inline-block;*/
+}
+.questiontable td
+{
+	text-align: center !important;
+}
+.questiontable td img
+{
+	width: 45px;
+	height: 45px;
+}
+.questiontable table td:first-child
+{
+	text-align: right !important;
+}
+.questiontable table td:last-child
+{
+	text-align: left !important;
+}
+
+
+/* Processing */
+.modalPopupProcessing {
+	background-color:#ffffdd;
+	border-width: 2px;
+	border-style:solid;
+	border-color: #7F5217;
+	padding:3px;
+	width:250px;
+}
+.modalBackgroundProcessing
+{
+	background-color: Gray;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+	
+}
+.processingtable
+{
+	width: 100%;
+}
+.processingtable td
+{
+    text-align: center;
+}
+.processingtable td img
+{
+	width: 45px;
+	height: 45px;
+}
+.processingtable table td:first-child
+{
+	text-align: right !important;
+}
+.processingtable table td:last-child
+{
+	text-align: left !important;
+}
+
+.ContextMenuTarget
+{
+}
+.ContextMenuTarget:hover
+{
+    cursor: pointer;
+}
+.ContextMenuPanel 
+{
+	border: 1px solid #868686;
+	z-index: 1000;
+	background: url(../Images/menu-bg.gif) repeat-y 0 0 #FAFAFA;
+	cursor: pointer;
+	padding: 1px 1px 0px 1px;
+}
+
+.ContextMenuBreak
+{
+	margin:1px 1px 1px 32px;
+	padding:0;
+	height:1px;
+	overflow:hidden;
+	display:block;
+	border-top: 1px solid #C5C5C5;	
+}
+
+a.ContextMenuItem
+{
+	margin: 1px 0 1px 0;
+	display: block;
+	color: #003399;
+	text-decoration: none;
+	cursor: pointer;	
+	padding: 4px 19px 4px 33px;
+	white-space: nowrap;
+}
+
+a.ContextMenuItem-Selected
+{
+	font-weight: bold;
+}
+
+a.ContextMenuItem:hover
+{
+	background-color: #FFE6A0;
+	color: #003399;
+	border: 1px solid #D2B47A;
+	padding: 3px 18px 3px 32px;
+}
+
+/*Style for gridview, not use at the moment*/
+.gridview
+{
+   /*width: 100%;*/
+    border-spacing: 1px;
+    padding: 2px 2px 2px 2px;
+    margin-top: 4px;
+    margin-bottom: 0px;
+    border-collapse: collapse;
+    
+}
+.gridview tr td
+{ 
+    border: 1px solid;
+}
+.gridview tr
+{
+   height: 20px;
+}
+.gridview td.left, .gridview th.left
+{
+    text-align: center;
+}
+.gridview td.right, .gridview th.right
+{
+    text-align: right;
+}
+.gridview td.center, .gridview th.center
+{
+    text-align: center;
+}
+
+.gridview th.rowno
+{
+    text-align: center !important;
+    width: 3%;
+}
+
+.gridview td.rowno
+{
+    text-align: right !important;
+    width: 3%;
+}
+
+.gridview td.checkbox, .gridview th.checkbox
+{
+    text-align: center !important;
+    width: 3%;
+}
+.gridview tr.normal
+{
+   color: #333333;
+   background-color: white;
+}
+.gridview tr.alternate
+{
+   color: #284775;
+   background-color: #F0F8FF;
+}
+.gridview tr.selected
+{
+   color: #333333;
+   background-color: #EDDA74;
+   font-weight: bold;
+}
+.gridview tr.editing
+{
+   background-color: #999999;
+}
+.gridview td.select
+{
+    width: 5%;
+}
+
+.gridview tr.normal:hover, .gridview tr.alternate:hover, .gridview tr.selected:hover, .gridview tr.editing:hover
+{
+   background-color: #6495ED;
+   color: black;
+}
+.gridview tr.normal a:hover, .gridview tr.alternate a:hover, .gridview tr.selected a:hover, .gridview tr.editing a:hover
+{
+   color: black;
+}
+/*
+.gridview td.red
+{
+     background-color: Red !important;
+}
+.gridview td.yellow
+{
+    
+     background-color: Yellow !important;
+}
+*/
+.gridview td.green
+{
+     background-color: #9BCE34 !important;
+}
+.gridview td.pink
+{
+     background-color: #FDD7E4 !important;
+}
+
+/*
+.gridview tr.redf
+{
+   color: red;
+   background-color: #F0F8FF;
+}
+.gridview td.redf
+{
+   color: red;
+   background-color: #F0F8FF;
+}
+*/
+
+
+.gridview tr.orange
+{
+   color: #333333;
+   background-color: #FE9A2E;
+}
+.gridview td.orange
+{
+   color: #333333;
+   background-color: #FE9A2E;
+}
+.gridview tr.yellow
+{
+   background-color: yellow;
+}
+.gridview td.yellow
+{
+   background-color: yellow;
+}
+.gridview tr.bold
+{
+    font-weight: bold;
+}
+.gridview td.bold
+{
+   font-weight: bold;
+}
+/*Header Start*/
+.gridview tr.header
+{
+   color: white;
+   background-color: #5D7B9D;
+   font-weight: bold;
+}
+.gridview tr.header a
+{
+   color: white !important;
+}
+/*Header End*/
+
+/*Footer Start*/
+.gridview tr.footer
+{
+   color: white;
+   background-color: #5D7B9D;
+   font-weight: bold;
+}
+/*Footer End*/
+/*Paper Start*/
+.gridview pgr 
+{
+    text-align: right;
+}
+.gridview .pgr 
+{
+    background-color: #284775;
+    color: #fff;
+    font-weight: bold;
+}
+.gridview .pgr table
+{
+    width: auto !important;
+}
+.gridview .pgr table tr
+{
+   
+}
+.gridview .pgr table tr a
+{
+   color: #fff;
+}
+.gridview .pgr table td
+{
+    border: none;
+    padding: 0px 4px 0px 4px !important;
+}
+.gridview .pgr table td:last-child
+{
+    width: 100%;
+    vertical-align: middle !important;
+    text-align: left;
+}
+.gridview .pgr input.pagesizenumber
+{
+    text-align: right;
+    width: 30px;
+     /*margin: 0px 0px 0px 5px;*/
+    font-weight: bold;
+    font-size: 0.9em;
+    height: 90%;
+}
+/*Style for gridview eYieldDashboard START*/
+.gridview tr.header td
+{
+    background-color: #5E90AE;
+}
+.gridview tr.header td.darkturquoise
+{
+    background-color: #00D0D3 !important;
+}
+
+.gridview tr.outputtotal
+{
+    font-weight: bold;
+   color: white;
+   background-color: #5E90AE;
+}
+.gridview td.outputtotal
+{
+    font-weight: bold;
+   color: white;
+   background-color: #5E90AE;
+}
+
+.gridview tr.red
+{
+   background-color: red;
+   
+}
+.gridview td.red
+{
+   background-color: red;
+}
+.gridview td.yellow a
+{
+   color: Black;
+}
+.gridview td.redwhite a
+{
+   color: White;
+}
+.gridview td.redwhite
+{
+   background-color: red;
+   color: White;
+}
+.gridview td.orangewhite
+{
+   background-color: orange;
+   color: White;
+}
+.gridview td.orangewhite a
+{
+   color: White;
+}
+/*Paper End*/
+/*Style for gridview*/
+.invisible
+{
+    outline: 0;
+    visibility: hidden;
+    width: 0px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    background-image: none !important;
+    overflow: hidden; line-height: 0px;
+    min-width: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-width: 0px;
+}
+.infoheaderborder
+{
+    width: 700px;
+	border-width: 2px;
+	padding: 1px;
+	border-style: ridge;
+	border-color: rgb(115, 106, 255);
+	background-color: white;
+	-moz-border-radius: 6px 6px 6px 6px;
+    text-align: center;
+	display: inline-block;
+}
+.infoheader
+{
+    background-color: 	#E8A317;
+	color: #ffffff;
+	border: 1px solid #FFFFFF;
+	padding: 3px;
+	font-weight: bold;
+	height: 20px;
+	vertical-align:middle;
+	-moz-border-radius: 3px 3px 3px 3px;
+
+}
+.infocontent
+{
+	padding: 10px;
+	font-size:14px;
+}
+.breadcrumb 
+{
+    color: #396EAA;
+	padding: 1px;
+	font-weight: bold;
+}
+.breadcrumb:hover
+{
+    color: #C85A17;
+	padding: 1px;
+	font-weight: bold;
+}
+
+
+.tableapply
+{
+    width: auto;
+    border-collapse: separate;
+    border: 0px;
+
+}
+.tableapply td
+{
+    width: auto;
+    border-bottom: none;
+    text-align: right !important;
+    vertical-align: middle !important;
+}
+.tableapply td:first-child
+{
+    width: 100%;
+}
+.tableapply td:last-child
+{
+    white-space: nowrap;
+}
+
+/*END Styles for general*/
+/*Chart START*/
+.chartArea 
+{
+    text-align: center !important;
+}
+.chartArea  img
+{
+    width: 95% !important;
+}
+/*Chart END*/

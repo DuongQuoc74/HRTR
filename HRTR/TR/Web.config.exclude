@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<configuration xmlns="http://schemas.microsoft.com/.NetConfiguration/v2.0">
+	<system.web>
+		<pages maintainScrollPositionOnPostBack="True" />
+		<authorization>
+			<deny users="?" />
+		</authorization>
+	</system.web>
+  <location path="HCM.master">
+    <system.web>
+      <authorization>
+        <allow users="*" />
+      </authorization>
+    </system.web>
+  </location>
+  <location path="HRTR.css">
+    <system.web>
+      <authorization>
+        <allow users="*" />
+      </authorization>
+    </system.web>
+  </location>
+  <location path="HRTR.js">
+    <system.web>
+      <authorization>
+        <allow users="*" />
+      </authorization>
+    </system.web>
+  </location>
+  <location path="Info.aspx">
+    <system.web>
+      <authorization>
+        <allow users="*" />
+      </authorization>
+    </system.web>
+  </location>
+	<location path="images">
+		<system.web>
+			<authorization>
+				<allow users="?" />
+			</authorization>
+		</system.web>
+	</location>
+	
+</configuration>

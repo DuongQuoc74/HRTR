@@ -1,0 +1,330 @@
+﻿using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.IO;
+using HRTR.Server;
+
+public partial class HRTR_TrainingRecordI : System.Web.UI.Page
+{
+    #region General
+    protected override void OnLoad(EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            Session["EmployeeListSort"] = "";
+            BindData();
+        }
+        Page.Form.Attributes.Add("enctype", "multipart/form-data");
+    }
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        BindData();
+    }
+
+    protected void btnExport_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            DataTable dt = SearchTrainingRecord();
+
+            DataView view = new DataView(dt);
+            DataTable newTable = view.ToTable(false, "EmployeeID", "EmployeeIDSAP", "UserName", "EmployeeName", "TrainingCodeID", "Description", "DueDate", "ExtendDay", "ExtendFromDate", "CompleteDate");
+
+            string strtempfolder = HRTRConfig.GetExportsFolder;
+
+            string strdesfile = @"" + strtempfolder + @"\EmpTrainingLock_"
+                + String.Format("{0:MMddyyyyHHmmss}", DateTime.Now)
+                //+ "_" + this.UserProfileID.ToString()
+                + ".csv";
+
+            string strdesfilefullpath = MapPath(strdesfile);
+
+
+            eUtilities.CSVFile.Export(newTable, strdesfilefullpath, ",");
+            //string stropenfile = @"/HRTR.UI" + PathMap(strdesfilefullpath);
+            string stropenfile =  PathMap(strdesfilefullpath);
+            string strscript = "<script language='javascript'></script>";
+            strscript += "<script>";
+            strscript += "window.open('" + stropenfile + "', '_blank');";
+            strscript += "</script>";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "strscriptEmpTrainingLock_", strscript, false);
+
+        }
+        catch (Exception ex)
+        {
+            lblMessage.Text = ex.Message;
+            btnMessage.Focus();
+            mpeMessage.Show();
+        }
+
+    }
+
+    protected void grvTrainingRecord_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        grvTrainingRecord.PageIndex = e.NewPageIndex;
+        BindData();
+    }
+
+    protected void grvTrainingRecord_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+
+    }
+
+    protected void grvTrainingRecord_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        string str_ssname = "EmployeeListSort";
+        string strSort = e.SortExpression.ToString();
+        string str_sort = "" + strSort + " " + "ASC" + "";
+        try
+        {
+            if (Session[str_ssname].ToString().Length > 4)
+            {
+                string str_temp = "";
+                string str_temp2 = Session[str_ssname].ToString();
+                if (str_temp2.EndsWith("ASC"))
+                {
+                    str_temp = str_temp2.Remove(str_temp2.Length - 3, 3);
+                    str_temp = str_temp.Trim();
+                    if (str_temp.Equals(strSort, StringComparison.OrdinalIgnoreCase))
+                    {
+                        str_temp2 = str_temp2.Replace("ASC", "DESC");
+                        str_sort = str_temp2;
+                    }
+                }
+
+            }
+        }
+        catch
+        {
+        }
+        Session[str_ssname] = str_sort;
+        BindData(str_sort);
+    }
+
+    protected void grvTrainingRecord_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+       
+    }
+
+    private void BindData(string pstr_sort = "")
+    {
+        if (string.IsNullOrEmpty(pstr_sort))
+        {
+            if (Session["EmployeeListSort"] != null)
+            {
+                pstr_sort = Session["EmployeeListSort"].ToString();
+            }
+        }
+        DataTable dtLockRecord = SearchTrainingRecord();
+
+        if (!string.IsNullOrEmpty(pstr_sort))
+            dtLockRecord.DefaultView.Sort = pstr_sort;
+        grvTrainingRecord.DataSource = dtLockRecord;
+        grvTrainingRecord.DataBind();
+    }
+
+    private DataTable SearchTrainingRecord()
+    {
+        
+        DateTime dacertdatefrom = new DateTime(1900, 1, 1);
+        try
+        {
+            dacertdatefrom = DateTime.ParseExact(txtCertDateFromS.Text.Trim(), "dd/MM/yyyy", null);
+        }
+        catch { }
+
+        DateTime dacertdateto = DateTime.Now;
+        try
+        {
+            dacertdateto = DateTime.ParseExact(txtCertDateToS.Text.Trim(), "dd/MM/yyyy", null);
+        }
+        catch { }
+        string employeeid = txtEmployeeIDS.Text.Trim();
+        string employeeidsap = txtEmployeeIDSAPS.Text.Trim();
+        return HRTR.Server.TrainingRecord.SearchBE(dacertdatefrom, dacertdateto, employeeid, employeeidsap);
+
+    }
+    #endregion
+
+    #region Tab Control
+    protected void mvTrainingRecord_Command(object sender, CommandEventArgs e)
+    {
+        SetMultiviewActive((string)e.CommandName);
+    }
+
+    private void SetMultiviewActive(string strviewid)
+    {
+        switch (strviewid)
+        {
+            case "Search":
+                mvTrainingRecord.SetActiveView(vSearchTrainingRecord);
+                lbSearch.CssClass = "multiviewtabactive";
+                lbImport.CssClass = "multiviewtabinactive";
+
+                break;
+            case "Import":
+                mvTrainingRecord.SetActiveView(vUploadTrainingRecord);
+                lbSearch.CssClass = "multiviewtabinactive";
+                lbImport.CssClass = "multiviewtabactive";
+                break;
+
+        }
+    }
+    #endregion
+
+    #region Import
+    protected void grvTrainingRecordTemp_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        grvTrainingRecordTemp.PageIndex = e.NewPageIndex;
+        BindDataTemp();
+    }
+
+    protected void grvTrainingRecordTemp_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        string str_ssname = "TrainingRecordTempListSort";
+        string strSort = e.SortExpression.ToString();
+        string str_sort = "" + strSort + " " + "ASC" + "";
+        try
+        {
+            if (Session[str_ssname].ToString().Length > 4)
+            {
+                string str_temp = "";
+                string str_temp2 = Session[str_ssname].ToString();
+                if (str_temp2.EndsWith("ASC"))
+                {
+                    str_temp = str_temp2.Remove(str_temp2.Length - 3, 3);
+                    str_temp = str_temp.Trim();
+                    if (str_temp.Equals(strSort, StringComparison.OrdinalIgnoreCase))
+                    {
+                        str_temp2 = str_temp2.Replace("ASC", "DESC");
+                        str_sort = str_temp2;
+                    }
+                }
+
+            }
+        }
+        catch
+        {
+        }
+        Session[str_ssname] = str_sort;
+        BindDataTemp(str_sort);
+    }
+
+    private void BindDataTemp(string pstr_sort = "")
+    {
+        if (string.IsNullOrEmpty(pstr_sort))
+        {
+            if (Session["TrainingRecordTempListSort"] != null)
+            {
+                pstr_sort = Session["TrainingRecordTempListSort"].ToString();
+            }
+        }
+        int iuserprofileid = Convert.ToInt32(HttpContext.Current.Session["UserProfileID"]);
+        DataTable dt = HRTR.Server.TrainingRecord.SearchTemp(iuserprofileid);
+        if (!string.IsNullOrEmpty(pstr_sort))
+            dt.DefaultView.Sort = pstr_sort;
+        grvTrainingRecordTemp.DataSource = dt;
+        grvTrainingRecordTemp.DataBind();
+        grvTrainingRecordTemp.Visible = true;
+
+        int iparttemptoal = dt.Rows.Count;
+        if (iparttemptoal > 0)
+            pnUploadInfo.Visible = true;
+        else
+            pnUploadInfo.Visible = false;
+        lblTrainingRecordTempCount.Text = iparttemptoal.ToString() + " record(s)";
+
+        DataView dvEmployeeTemp = dt.DefaultView;
+
+        dvEmployeeTemp.RowFilter = "IsValid = True";
+        int iparttempvalid = dvEmployeeTemp.Count;
+        lblTrainingRecordTempValidCount.Text = iparttempvalid.ToString() + " record(s)";
+
+        if (iparttempvalid > 0)
+            btnUploadAsk.Visible = true;
+        else
+            btnUploadAsk.Visible = false;
+
+        int iparttempinvalid = iparttemptoal - iparttempvalid;
+        lblTrainingRecordTempInValidCount.Text = iparttempinvalid.ToString() + " record(s)";
+    }
+
+    protected void AsyncFUTrainingRecord_UploadedComplete(object sender, AjaxControlToolkit.AsyncFileUploadEventArgs e)
+    {
+        string strext = Path.GetExtension(AsyncFUTrainingRecord.FileName);
+        if (strext == ".xls" || strext == ".xlsx")
+        {
+            string strfilename = AsyncFUTrainingRecord.FileName;
+            string strtempfolder = HRTRConfig.GetTempFolder;
+            string savePath = MapPath(Path.Combine(strtempfolder, strfilename));
+            AsyncFUTrainingRecord.SaveAs(savePath);
+        }
+        else
+        {
+            AsyncFUTrainingRecord.ErrorBackColor = System.Drawing.Color.Red;
+        }
+    }
+
+    protected void btnPreview_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            string strfilename = hdUploadFileName.Value;
+            string strtempfolder = HRTRConfig.GetTempFolder;
+            string strfile = MapPath(Path.Combine(strtempfolder, strfilename));
+            int iuserprofileid = Convert.ToInt32(HttpContext.Current.Session["UserProfileID"]);
+            HRTR.Server.TrainingRecord.Preview(strfile, iuserprofileid);
+            BindDataTemp();
+            hdUploadFileName.Value = "";
+        }
+        catch (Exception ex)
+        {
+            lblMessage.Text = ex.Message;
+            btnMessage.Focus();
+            mpeMessage.Show();
+        }
+    }
+
+    protected void btnUpload_Click(object sender, EventArgs e)
+    {
+        string strmess = string.Empty;
+        try
+        {
+            int iuserprofileid = Convert.ToInt32(HttpContext.Current.Session["UserProfileID"]);
+            HRTR.Server.TrainingRecord.Import(iuserprofileid);
+
+            BindData();
+
+            grvTrainingRecordTemp.Visible = false;
+            pnUploadInfo.Visible = false;
+            btnUploadAsk.Visible = false;
+
+            strmess = "Uploaded record(s) successfully.";
+
+        }
+        catch (Exception ex)
+        {
+            strmess = ex.Message;
+        }
+        lblMessage.Text = strmess;
+        btnMessage.Focus();
+        mpeMessage.Show();
+    }
+    #endregion
+
+    #region Private Methods
+    public static string PathMap(string strpath)
+    {
+        string strapproot = HttpContext.Current.Request.PhysicalApplicationPath.TrimEnd('\\');
+        return strpath.Replace(strapproot, string.Empty).Replace('\\', '/');
+    }
+    #endregion
+}

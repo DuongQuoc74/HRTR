@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[HR_Employee_20160401] (
+    [EmployeeID_ID]   INT            NOT NULL,
+    [EmployeeID]      NVARCHAR (20)  NULL,
+    [EmployeeIDSAP]   NVARCHAR (20)  NULL,
+    [EmployeeName]    NVARCHAR (100) NULL,
+    [OperatorGroupID] INT            NULL,
+    [CompanyID]       INT            NULL,
+    [DepartmentID]    INT            NULL,
+    [JobTitle]        NVARCHAR (50)  NULL,
+    [PositionID]      INT            NULL,
+    [ShiftID]         INT            NULL,
+    [WorkcellID]      INT            NULL,
+    [Supervisor]      NVARCHAR (100) NULL,
+    [IsActive]        BIT            NULL,
+    [JoinedDate]      DATETIME       NULL,
+    [UserName]        VARCHAR (50)   NULL,
+    [IsSupervisor]    BIT            NULL,
+    [LastUpdated]     DATETIME       NULL,
+    [LastUpdatedBy]   INT            NULL,
+    [Customer_ID]     INT            NULL,
+    [Email]           NVARCHAR (100) NULL,
+    [IsValidUserName] BIT            NULL,
+    [WorkingStatusID] INT            NULL
+);
+

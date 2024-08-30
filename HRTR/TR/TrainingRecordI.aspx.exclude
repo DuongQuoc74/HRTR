@@ -1,0 +1,405 @@
+﻿<%@ Page Title="Training Record (Import)" Language="C#" MasterPageFile="~/HCM.master"
+    AutoEventWireup="true" CodeFile="TrainingRecordI.aspx.cs" Inherits="HRTR_TrainingRecordI" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<asp:Content ID="Content1" runat="Server" ContentPlaceHolderID="maincontent">
+    <div id="divMainContent" style="height: 100%">
+        <div class="MainContainHeader">
+            Training Record (Import)</div>
+        <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" CombineScripts="True"
+            EnablePageMethods="True">
+            <Scripts>
+                <asp:ScriptReference Path="../Scripts/Common.js"></asp:ScriptReference>
+                <asp:ScriptReference Path="../Scripts/TrainingRecordI.js"></asp:ScriptReference>
+            </Scripts>
+        </ajaxToolkit:ToolkitScriptManager>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <asp:LinkButton ID="lbSearch" runat="server" CssClass="multiviewtabactive" OnCommand="mvTrainingRecord_Command"
+                                    CommandName="Search">Search</asp:LinkButton>
+                                <asp:LinkButton ID="lbImport" runat="server" CssClass="multiviewtabinactive" OnCommand="mvTrainingRecord_Command"
+                                    CommandName="Import">Import From Excel File</asp:LinkButton>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:MultiView ID="mvTrainingRecord" runat="server" ActiveViewIndex="0">
+                                    <asp:View ID="vSearchTrainingRecord" runat="server">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <fieldset>
+                                                        <legend>Search</legend>
+                                                        <table class="tablesearch">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width: 10%">
+                                                                        <asp:Label ID="Label53" runat="server" Text="Cert Date"></asp:Label>
+                                                                    </td>
+                                                                    <td style="width: 15%; white-space: nowrap;">
+                                                                        <asp:TextBox ID="txtCertDateFromS" runat="server" Width="80px"></asp:TextBox>
+                                                                        <img id="imgCertDateFromS" class="dateselected" src="../Images/icon-calendar.gif"
+                                                                            alt="" />
+                                                                        <ajaxToolkit:CalendarExtender ID="ceCertDateFromS" runat="server" CssClass="MyCalendar"
+                                                                            TargetControlID="txtCertDateFromS" Enabled="True" PopupButtonID="imgCertDateFromS"
+                                                                            Format="dd/MM/yyyy">
+                                                                        </ajaxToolkit:CalendarExtender>
+                                                                        <asp:Label ID="Label24" runat="server" Text="To"></asp:Label>
+                                                                        <asp:TextBox ID="txtCertDateToS" runat="server" Width="80px"></asp:TextBox>
+                                                                        <img id="imgCertDateToS" class="dateselected" src="../Images/icon-calendar.gif" alt="" />
+                                                                        <ajaxToolkit:CalendarExtender ID="ceCertDateToS" runat="server" CssClass="MyCalendar"
+                                                                            TargetControlID="txtCertDateToS" Enabled="True" PopupButtonID="imgCertDateToS"
+                                                                            Format="dd/MM/yyyy">
+                                                                        </ajaxToolkit:CalendarExtender>
+                                                                    </td>
+                                                                    <td style="width: 10%">
+                                                                        <asp:Label ID="Label3" runat="server" Text="Employee ID"></asp:Label>
+                                                                    </td>
+                                                                    <td style="width: 15%">
+                                                                        <asp:TextBox ID="txtEmployeeIDS" runat="server"></asp:TextBox>
+                                                                    </td>
+                                                                    <td style="width: 10%">
+                                                                        <asp:Label ID="Label6" runat="server" Text="Employee ID SAP"></asp:Label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:TextBox ID="txtEmployeeIDSAPS" runat="server"></asp:TextBox>
+                                                                    </td>
+                                                                    <td>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="white-space: nowrap;">
+                                                                        <asp:Button ID="btnSearch" OnClick="btnSearch_Click" runat="server" Text="Search"
+                                                                            CssClass="button" UseSubmitBehavior="False"></asp:Button>
+                                                                        <asp:Button ID="btnExport" OnClick="btnExport_Click" runat="server" Text="Export"
+                                                                            CssClass="button" UseSubmitBehavior="False"></asp:Button>
+                                                                    </td>
+                                                                    <td colspan="6">
+                                                                        <asp:Label ID="lblSearch" runat="server" Text=""></asp:Label>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </fieldset>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:GridView ID="grvTrainingRecord" runat="server" AllowPaging="True" AllowSorting="True"
+                                                        PageSize="20" AutoGenerateColumns="False" DataKeyNames="TrainingRecordID" OnPageIndexChanging="grvTrainingRecord_PageIndexChanging"
+                                                        OnRowCommand="grvTrainingRecord_RowCommand" OnRowDataBound="grvTrainingRecord_RowDataBound"
+                                                        OnSorting="grvTrainingRecord_Sorting" CssClass="gridview" PagerStyle-CssClass="pgr"
+                                                        EditRowStyle-CssClass="editing" SelectedRowStyle-CssClass="selected" HeaderStyle-CssClass="header"
+                                                        FooterStyle-CssClass="footer" AlternatingRowStyle-CssClass="alternate" RowStyle-CssClass="normal">
+                                                        <PagerSettings Mode="NumericFirstLast" />
+                                                        <Columns>
+                                                            <asp:TemplateField HeaderText="No.">
+                                                                <ItemTemplate>
+                                                                    <%# Container.DataItemIndex + 1 %>
+                                                                </ItemTemplate>
+                                                                <ItemStyle CssClass="rowno" />
+                                                            </asp:TemplateField>
+                                                            <asp:BoundField DataField="EmployeeID" HeaderText="Employee ID" SortExpression="EmployeeID" />
+                                                            <asp:BoundField DataField="EmployeeName" HeaderText="Employee Name" SortExpression="EmployeeName" />
+                                                            <asp:BoundField DataField="OperatorGroupName" HeaderText="Operator Group" SortExpression="OperatorGroupName" />
+                                                            <asp:BoundField DataField="CompanyName" HeaderText="Company" SortExpression="CompanyName" />
+                                                            <asp:BoundField DataField="DepartmentName" HeaderText="Department" SortExpression="DepartmentName" />
+                                                            <asp:BoundField DataField="JobTitle" HeaderText="Job Title" SortExpression="JobTitle" />
+                                                            <asp:BoundField DataField="PositionName" HeaderText="Position" SortExpression="PositionName" />
+                                                            <asp:BoundField DataField="ShiftName" HeaderText="Shift" SortExpression="ShiftName" />
+                                                            <asp:BoundField DataField="WorkcellName" HeaderText="Workcell" SortExpression="WorkcellName" />
+                                                            <asp:BoundField DataField="Supervisor" HeaderText="Supervisor" SortExpression="Supervisor" />
+                                                            <asp:CheckBoxField DataField="IsActive" HeaderText="Active" SortExpression="IsActive">
+                                                                <ItemStyle CssClass="checkbox" />
+                                                            </asp:CheckBoxField>
+                                                            <asp:BoundField DataField="TrainingGroupName" HeaderText="Training Group" SortExpression="TrainingGroupName" />
+                                                            <asp:BoundField DataField="CourseGroupName" HeaderText="Course Group" SortExpression="CourseGroupName" />
+                                                            <asp:BoundField DataField="CourseName" HeaderText="Course" SortExpression="LineItem" />
+                                                            <asp:BoundField DataField="ProductName" HeaderText="Product" SortExpression="ProductName" />
+                                                            <asp:BoundField DataField="CertDate" HeaderText="Certificate Date" SortExpression="CertDate"
+                                                                DataFormatString="{0:MM/dd/yyyy}" />
+                                                            <asp:BoundField DataField="ExpDate" HeaderText="Expired Date" SortExpression="ExpDate"
+                                                                DataFormatString="{0:MM/dd/yyyy}" />
+                                                            <asp:CheckBoxField DataField="IsExpired" HeaderText="Expired" SortExpression="IsExpired">
+                                                                <ItemStyle CssClass="checkbox" />
+                                                            </asp:CheckBoxField>
+                                                            <asp:BoundField DataField="Trainer" HeaderText="Trainer" SortExpression="Trainer" />
+                                                        </Columns>
+                                                    </asp:GridView>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:View>
+                                    <asp:View ID="vUploadTrainingRecord" runat="server">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <fieldset>
+                                                        <legend>Upload</legend>
+                                                        <table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width: 86px">
+                                                                        <asp:Label ID="Upload" runat="server" Text="Select file"></asp:Label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <ajaxToolkit:AsyncFileUpload ID="AsyncFUTrainingRecord" runat="server" CssClass="FileUploadClass"
+                                                                            Width="400px" OnClientUploadStarted="uploadStart" OnClientUploadComplete="uploadComplete"
+                                                                            OnClientUploadError="uploadError" ThrobberID="myThrobber" OnUploadedComplete="AsyncFUTrainingRecord_UploadedComplete"
+                                                                            FailedValidation="False"></ajaxToolkit:AsyncFileUpload>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:Label ID="myThrobber" runat="server" Style="display: none">
+                                                                            <img src="../Images/indicator.gif" style="text-align:center" alt="loading" />
+                                                                        </asp:Label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:CustomValidator ID="cvFile" runat="server" ValidationGroup="vgpreviewTrainingRecord"
+                                                                            ClientValidationFunction="cvFile_ClientValidate" ErrorMessage="Select file">(*) Please select file!</asp:CustomValidator>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:Button ID="btnPreview" runat="server" CssClass="button" ValidationGroup="vgpreviewTrainingRecord"
+                                                                            Text="Preview" OnClick="btnPreview_Click" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:HyperLink ID="hlEmployeeTemplate" runat="server" NavigateUrl="../Templates/TrainingRecord.xlsx">Template</asp:HyperLink>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="6">
+                                                                        <asp:Label ID="lblUploadStatus" runat="server" CssClass="error"></asp:Label>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </fieldset>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:GridView ID="grvTrainingRecordTemp" runat="server" AllowPaging="True" AllowSorting="True"
+                                                        AutoGenerateColumns="False" PageSize="30" OnPageIndexChanging="grvTrainingRecordTemp_PageIndexChanging"
+                                                        OnSorting="grvTrainingRecordTemp_Sorting" CssClass="gridview" PagerStyle-CssClass="pgr"
+                                                        DataKeyNames="UserName,TrainingCodeID" EditRowStyle-CssClass="editing" SelectedRowStyle-CssClass="selected"
+                                                        HeaderStyle-CssClass="header" FooterStyle-CssClass="footer" AlternatingRowStyle-CssClass="alternate"
+                                                        RowStyle-CssClass="normal">
+                                                        <PagerSettings Mode="NumericFirstLast" />
+                                                        <Columns>
+                                                            <asp:TemplateField HeaderText="No.">
+                                                                <ItemTemplate>
+                                                                    <%# Container.DataItemIndex + 1 %>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:BoundField DataField="EmployeeID" HeaderText="Employee ID" SortExpression="EmployeeID" />
+                                                            <asp:BoundField DataField="EmployeeName" HeaderText="Employee Name" SortExpression="EmployeeName" />
+                                                            <asp:BoundField DataField="OperatorGroupName" HeaderText="Operator Group" SortExpression="OperatorGroupName" />
+                                                            <asp:BoundField DataField="CompanyName" HeaderText="Company" SortExpression="CompanyName" />
+                                                            <asp:BoundField DataField="DepartmentName" HeaderText="Department" SortExpression="DepartmentName" />
+                                                            <asp:BoundField DataField="JobTitle" HeaderText="Job Title" SortExpression="JobTitle" />
+                                                            <asp:BoundField DataField="PositionName" HeaderText="Position" SortExpression="PositionName" />
+                                                            <asp:BoundField DataField="ShiftName" HeaderText="Shift" SortExpression="ShiftName" />
+                                                            <asp:BoundField DataField="WorkcellName" HeaderText="Workcell" SortExpression="WorkcellName" />
+                                                            <asp:BoundField DataField="Supervisor" HeaderText="Supervisor" SortExpression="Supervisor" />
+                                                            <asp:CheckBoxField DataField="IsActive" HeaderText="Active" SortExpression="IsActive">
+                                                                <ItemStyle CssClass="checkbox" />
+                                                            </asp:CheckBoxField>
+                                                            <asp:BoundField DataField="TrainingGroupName" HeaderText="Training Group" SortExpression="TrainingGroupName" />
+                                                            <asp:BoundField DataField="CourseGroupName" HeaderText="Course Group" SortExpression="CourseGroupName" />
+                                                            <asp:BoundField DataField="CourseName" HeaderText="Course" SortExpression="LineItem" />
+                                                            <asp:BoundField DataField="ProductName" HeaderText="Product" SortExpression="ProductName" />
+                                                            <asp:BoundField DataField="CertDate" HeaderText="Certificate Date" SortExpression="CertDate"
+                                                                DataFormatString="{0:MM/dd/yyyy}" />
+                                                            <asp:BoundField DataField="ExpDate" HeaderText="Expired Date" SortExpression="ExpDate"
+                                                                DataFormatString="{0:MM/dd/yyyy}" />
+                                                            <asp:CheckBoxField DataField="IsExpired" HeaderText="Expired" SortExpression="IsExpired">
+                                                                <ItemStyle CssClass="checkbox" />
+                                                            </asp:CheckBoxField>
+                                                            <asp:BoundField DataField="Trainer" HeaderText="Trainer" SortExpression="Trainer" />
+                                                            <asp:BoundField DataField="ErrorMessage" HeaderText="Error Message" SortExpression="ErrorMessage" />
+                                                        </Columns>
+                                                    </asp:GridView>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Panel ID="pnUploadInfo" runat="server" Visible="false">
+                                                        <table>
+                                                            <tr>
+                                                                <td style="width: 10%">
+                                                                    <asp:Label ID="lblTrainingRecordTemp" runat="server" Text="Total: " CssClass="boldMsg"></asp:Label>
+                                                                </td>
+                                                                <td style="width: 10%">
+                                                                    <asp:Label ID="lblTrainingRecordTempCount" runat="server" Text="" CssClass="Msg"></asp:Label>
+                                                                </td>
+                                                                <td style="width: 10%">
+                                                                    <asp:Label ID="lblTrainingRecordTempValid" runat="server" Text="Valid: " CssClass="boldMsg"></asp:Label>
+                                                                </td>
+                                                                <td style="width: 10%">
+                                                                    <asp:Label ID="lblTrainingRecordTempValidCount" runat="server" Text="" CssClass="Msg"></asp:Label>
+                                                                </td>
+                                                                <td style="width: 10%">
+                                                                    <asp:Label ID="lblTrainingRecordTempInValid" runat="server" Text="Invalid: " CssClass="boldMsg"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:Label ID="lblTrainingRecordTempInValidCount" runat="server" Text="" CssClass="Msg"></asp:Label>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:Panel>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Button ID="btnUploadAsk" runat="server" Text="Upload" CssClass="button" ValidationGroup="vgpreviewTrainingRecord"
+                                                        Visible="false" OnClientClick="return uploadTrainingRecordValidate();"></asp:Button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:View>
+                                </asp:MultiView>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <ajaxToolkit:ModalPopupExtender ID="mpeMessage" runat="server" TargetControlID="lblMessageControl"
+                                    BackgroundCssClass="modalBackgroundConfirm" OkControlID="btnMessage" PopupControlID="PanelConfirm"
+                                    BehaviorID="bhmpeMessage" DropShadow="false" Enabled="True">
+                                </ajaxToolkit:ModalPopupExtender>
+                                <asp:Panel ID="PanelConfirm" runat="server" Style="display: none;" CssClass="modalPopupConfirm">
+                                    <table class="confirmtable">
+                                        <tbody>
+                                            <tr>
+                                                <td class="confirmheader" colspan="2" style="text-align: center">
+                                                    <asp:Label ID="lblCaption" runat="server" Text="Employee">
+                                                    </asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <img style="width: 45px; height: 45px" src="../Images/infoconfirm.jpg" alt="!" />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <asp:Label ID="lblMessage" runat="server" CssClass="confirmmessage" Style="text-align: center">
+                                                    </asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" colspan="2">
+                                                    <asp:Button ID="btnMessage" runat="server" CssClass="button" OnClientClick="return false;"
+                                                        Text="OK" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </asp:Panel>
+                                <ajaxToolkit:ModalPopupExtender ID="mpeConfirmUpload" runat="server" BackgroundCssClass="modalBackgroundConfirm"
+                                    BehaviorID="bhmpeConfirmUpload" CancelControlID="btnCancelUpload" OkControlID="btnUploadR"
+                                    PopupControlID="PanelConfirmUpload" TargetControlID="lblUploadControl">
+                                </ajaxToolkit:ModalPopupExtender>
+                                <asp:Panel ID="PanelConfirmUpload" runat="server" CssClass="modalPopupConfirm" Style="display: none">
+                                    <table class="questiontable">
+                                        <tbody>
+                                            <tr>
+                                                <td align="center" class="confirmheader" colspan="2">
+                                                    <asp:Label ID="Label43" runat="server">Upload TrainingRecord - Confirmation</asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <img style="width: 45px; height: 45px" src="../Images/question.png" alt="?" />
+                                                </td>
+                                                <td>
+                                                    <asp:Label ID="lblConfirmUpload" runat="server" Text="Are you sure you want to upload record(s) from excel file?"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" colspan="2">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <asp:Button ID="btnUpload" runat="server" CssClass="button" OnClick="btnUpload_Click"
+                                                                        UseSubmitBehavior="false" Text="OK"  />
+                                                                </td>
+                                                                <td>
+                                                                    <asp:Button ID="btnCancelUpload" runat="server" CssClass="button" OnClientClick="return false;"
+                                                                        Text="Cancel"  />
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </asp:Panel>
+                                <ajaxToolkit:ModalPopupExtender ID="mpeProcessing" runat="server" BackgroundCssClass="modalBackgroundProcessing"
+                                    BehaviorID="bhmpeProcessing" DropShadow="false" Enabled="True" PopupControlID="PanelProcessing"
+                                    TargetControlID="lblProcessingControl">
+                                </ajaxToolkit:ModalPopupExtender>
+                                <asp:Panel ID="PanelProcessing" runat="server" CssClass="modalPopupProcessing" Style="display: none">
+                                    <table class="processingtable">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <img style="width: 45px; height: 45px" src="../Images/updateprogress.gif" alt="..." />
+                                                </td>
+                                                <td>
+                                                    <asp:Label ID="Label13" runat="server" Style="text-align: center">Processing...</asp:Label>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </asp:Panel>
+                                <div style="visibility: hidden">
+                                    <asp:Label ID="lblMessageControl" runat="server">
+                                    </asp:Label>
+                                    <asp:Label ID="lblProcessingControl" runat="server">
+                                    </asp:Label>
+                                    <asp:Label ID="lblUploadControl" runat="server">
+                                    </asp:Label>
+                                    <asp:HiddenField ID="hdUploadFileName" runat="server" />
+                                    <asp:Button ID="btnUpdateR" runat="server" CssClass="button" OnClientClick="return false;"
+                                        UseSubmitBehavior="False" />
+                                    <asp:Button ID="btnUploadR" runat="server" CssClass="button" OnClientClick="return false;"
+                                        UseSubmitBehavior="False" />
+                                    <asp:Button ID="btnReturnUpdateEmployee" runat="server" CssClass="button" OnClientClick="return false;"
+                                        UseSubmitBehavior="False" />
+                                    <asp:Label ID="lblUpdateEmployeeControl" runat="server">
+                                    </asp:Label>
+                                    <asp:Button ID="btnReturnEmployee" runat="server" CssClass="button" OnClientClick="return false;"
+                                        UseSubmitBehavior="False" />
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <ajaxToolkit:UpdatePanelAnimationExtender ID="UpdatePanelAnimationExtender1" runat="server"
+            TargetControlID="UpdatePanel1">
+            <Animations>
+            <OnUpdating>   
+                <Sequence>
+                    <ScriptAction Script="$find('bhmpeProcessing').show();"/>
+                    <Parallel duration="0">
+                          
+                    </Parallel>
+                </Sequence> 
+            </OnUpdating>
+            <OnUpdated>   
+                <Sequence>
+                    <ScriptAction Script="$find('bhmpeProcessing').hide();" />
+                    <Parallel duration="0">
+                            
+                    </Parallel>             
+                </Sequence>
+            </OnUpdated>
+            </Animations>
+        </ajaxToolkit:UpdatePanelAnimationExtender>
+    </div>
+</asp:Content>

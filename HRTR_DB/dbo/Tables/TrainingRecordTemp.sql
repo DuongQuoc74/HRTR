@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[TrainingRecordTemp] (
+    [EmployeeID_ID]      INT            NULL,
+    [EmployeeID]         VARCHAR (10)   NULL,
+    [ProductID]          INT            NULL,
+    [ProductName]        NVARCHAR (50)  NULL,
+    [Trainer]            NVARCHAR (100) NULL,
+    [CourseID]           INT            NULL,
+    [CourseName]         NVARCHAR (50)  NULL,
+    [CourseGroupID]      INT            NULL,
+    [CourseGroupName]    NVARCHAR (50)  NULL,
+    [TrainingGroupID]    INT            NULL,
+    [TrainingGroupName]  NVARCHAR (50)  NULL,
+    [CertDate]           DATE           NULL,
+    [ExpDate]            DATE           NULL,
+    [Score]              DECIMAL (4, 1) NULL,
+    [CertifiedLevelID]   INT            NULL,
+    [CertifiedLevelName] NVARCHAR (50)  NULL,
+    [OJT]                BIT            NULL,
+    [IsValid]            BIT            NULL,
+    [ErrorMessage]       NVARCHAR (255) NULL,
+    [LastUpdated]        DATETIME       CONSTRAINT [DF_TrainingRecordTemp_LastUpdatedDate] DEFAULT (getdate()) NULL,
+    [LastUpdatedBy]      INT            NULL,
+    [IsActive]           BIT            NULL,
+    [Comments]           NVARCHAR (255) NULL
+);
+

@@ -1,0 +1,102 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="HCM.Master.cs"
+    Inherits="HCM.Master" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,chrome=1" />
+    <title>Ho Chi Minh - HR Training Record - e Grape Chart</title>
+    <link href="~/Styles/Styles.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/HRTR.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/Print.css" media="print" rel="stylesheet" type="text/css" />
+    <script language="javascript" src="../Scripts/jquery-1.7.min.js" type="text/javascript"> </script>
+    <script language="javascript" src="../Scripts/HCM.js" type="text/javascript"> </script>
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js" type="text/javascript"></script>
+    <%--    <script language="javascript" src="savetheenvironment.js?time=180" type="text/javascript"></script>--%>
+</head>
+<body id="mainbody" runat="server">
+    <form id="frmMain" runat="server">
+    <table style="width: 100%;">
+        <tr id="header">
+            <td colspan="2">
+                <table style="width: 100%;">
+                    <tr>
+                        <td align="left" style="padding-left: 30px;" valign="middle">
+                            <asp:Label ID="Label1" runat="server" CssClass="logo" Text="Ho Chi Minh - HR Training Record - e Grape Chart"></asp:Label>
+                        </td>
+                        <td align="right" style="width: 250px;">
+                            <asp:LoginName ID="lgName" runat="server" CssClass="login" />
+                        </td>
+                        <%--<td align="right" style="width: 35px;">
+                            <asp:LinkButton ID="hlHelp" runat="server" ForeColor="White" OnClientClick="return OpenHelp();">Help</asp:LinkButton>
+                        </td>--%>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <div id="navtop">
+                    <asp:XmlDataSource ID="xmlDataSource" runat="server" EnableCaching="False" TransformFile="~/HRTR.xsl"
+                        XPath="MenuItems/MenuItem"></asp:XmlDataSource>
+                    <asp:Menu ID="MainMenu" runat="server" DataSourceID="xmlDataSource" MaximumDynamicDisplayLevels="2"
+                        Width="123px" StaticSubMenuIndent="10px">
+                        <DataBindings>
+                            <asp:MenuItemBinding DataMember="MenuItem" TextField="Text" ToolTipField="ToolTip"
+                                NavigateUrlField="NavigateUrl" />
+                        </DataBindings>
+                        <StaticMenuStyle CssClass="menu" />
+                        <StaticMenuItemStyle CssClass="menuItem" />
+                        <StaticSelectedStyle CssClass="menuSelectedItem" />
+                        <DynamicMenuStyle CssClass="menuPopup" />
+                        <DynamicMenuItemStyle CssClass="menuPopupItem" Font-Strikeout="False" />
+                        <DynamicHoverStyle CssClass="menuPopupItem" />
+                        <StaticHoverStyle CssClass="menuItemHover" />
+                    </asp:Menu>
+                </div>
+            </td>
+            <td style="width: 100%;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td valign="top">
+                            <div runat="server" id="navlink">
+                                <asp:HyperLink ID="hlHome" runat="server" CssClass="breadcrumb" NavigateUrl="Home.aspx">Home</asp:HyperLink>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <div>
+                                <asp:ContentPlaceHolder ID="maincontent" runat="server">
+                                </asp:ContentPlaceHolder>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right" valign="bottom">
+                Copyright © 2014 Jabil Vietnam Ltd. All rights reserved.<br />
+                Developed by HCM IT Team.<br />
+                <asp:Label ID="lblApplicationVersion" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>
+    </table>
+    </form>
+    <script type="text/javascript" language="javascript">
+        Sys.UI.Point = function Sys$UI$Point(x, y) {
+            x = Math.round(x);
+            y = Math.round(y);
+
+            var e = Function._validateParams(arguments, [
+                { name: "x", type: Number, integer: true },
+                { name: "y", type: Number, integer: true }
+            ]);
+            if (e) throw e;
+            this.x = x;
+            this.y = y;
+        }
+    </script>
+</body>
+</html>

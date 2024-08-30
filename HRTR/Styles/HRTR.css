@@ -1,0 +1,65 @@
+﻿/*For Grape Chart START*/
+.GrapeChart
+{
+   vertical-align: top; 
+   text-align: center;
+   width: 100% !important;
+   height: 100% !important;
+}
+.GrapeChartDashboardsDetailTitle
+{
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/*Chart START*/
+.messageGrapeChart
+{
+    color: #E56717;
+    font-size: 40px;
+    text-align: center;
+}
+td.messageGrapeChart
+{
+    color: #284775;
+    font-size: 35px;
+    text-align: center;
+    font-weight: bold;
+}
+/*Chart END*/
+.bodymygrapechartpopup {
+	background: none !important;
+}
+/*For Grape Chart END*/
+/*for HRTR only END*/
+
+/*For HRTR START*/
+.multiviewtabactive
+{
+    padding: 2px 10px 2px 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    height: 13px;
+    background: url(../Images/active.gif) repeat-x scroll 0 0 transparent;
+}
+.multiviewtabinactive
+{
+    padding: 2px 10px 2px 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    height: 13px;
+    background-color: Gray;
+    -moz-border-radius: 0px 0px 0px 5px;
+    background: url(../Images/inactive.gif) repeat-x scroll 0 0 transparent;
+}
+/*For HRTR END*/
+
+/*For DropDownCheckBoxes START*/
+.dropdowncheckboxes
+{
+    display: block !important;
+    background-color: #F0FFF0 !important;
+}
+/*For DropDownCheckBoxes END*/

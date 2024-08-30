@@ -1,0 +1,3 @@
+﻿CREATE LOGIN [svchcm_app]
+    WITH PASSWORD = N'oSt%ps>h_iyayn<efd|7agnnmsFT7_&#$!~<lImHyiDwgS2t', SID = 0xEB4A18502B40B4449F59AE81C13D5B42, DEFAULT_LANGUAGE = [us_english], CHECK_POLICY = OFF;
+
